@@ -82,23 +82,56 @@ getWinnersByYear(fifaData);
 Hint: Investigate your data to find "team initials"!
 Hint: use `.reduce` */
 
-function getCountryWins(/* code here */) {
+function getCountryWins(data, team) {
 
-    /* code here */
+    let teamwins = 0;
 
-};
+        let howmanywins = data.map(x => {
 
-getCountryWins();
+                if (x["Home Team Name"] === team){
+
+                    if (x["Home Team Goals"] > x["Away Team Goals"] ) {
+
+                        teamwins = teamwins + 1;
+                     }
+                }
+        })
+
+        if (teamwins > 0){                       
+             console.log(`${team} has ${teamwins} `) 
+             }
+    
+    }
+
+    getCountryWins(fifaData, 'Brazil');
 
 /* Task 8: Write a function called `getAverageGoals` that accepts a parameter `data` and returns the the average number of home team goals and away team goals scored per match (Hint: use .reduce and do this in 2 steps) */
 
-function getAverageGoals(/* code here */) {
+    function getAverageGoals(data) {
 
-    /* code here */
+            var arrayhome = [];
+            let arrayaway = [];
+        
+            for (let i = 0; i < data.length; i++) {
+                let object = data[i]
+                arrayhome.push(object["Home Team Goals"])
+                arrayaway.push(object["Away Team Goals"])
 
-};
+            }
 
-getAverageGoals();
+            let averagehome = arrayhome.reduce(function(a, b){
+                return a + b / arrayhome.length;
+                }, 0);
+
+            let averageaway = arrayaway.reduce(function(a, b){
+                return a + b / arrayaway.length;
+                }, 0);
+
+            console.log(`Average home goals are ${averagehome} Average away goals are ${averageaway}`); 
+
+    };
+
+getAverageGoals(fifaData);
 
 
 /// STRETCH 🥅 //
